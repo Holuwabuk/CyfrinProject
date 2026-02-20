@@ -1,14 +1,40 @@
+FundMe
+A decentralized crowdfunding smart contract built with Solidity and Foundry. Users can fund the contract with ETH, and only the owner can withdraw the funds.
 
-## TO DO
+Features
 
-install 'foundry-zksync' with bashing curl -L https://raw.githubusercontent.com/matter-labs/foundry-zksync/main/install-foundry-zksync | bash
+Fund the contract with ETH
+Minimum funding amount enforced via Chainlink Price Feeds (USD)
+Only the contract owner can withdraw
+Supports Sepolia testnet and zkSync
 
-Thats from https://foundry-book.zksync.io/introduction/installation/
+Requirements
 
-install latest version afterwards,replaces normal base foundry: foundryup-version
+Foundry
+foundryup-zksync (for zkSync support)
 
-compile with '--zksync':
+Setup
+Clone the repo and install dependencies:
+bashgit clone https://github.com/Holuwabuk/CyfrinProject.git
+cd CyfrinProject
+forge install
+Set up your environment variables by creating a .env file:
+PRIVATE_KEY=your_private_key
+SEPOLIA_RPC_URL=your_sepolia_rpc_url
+ETHERSCAN_API_KEY=your_etherscan_api_key
+Usage
+Build
+bashmake build
+Test
+bashforge test
+Deploy to Sepolia
+bashmake deploy-sepolia
+Deploy to zkSync
+bashforge script script/FundMe.s.sol:DeployFundMe --zksync --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast
+Contract Overview
 
-Reinstall vanilla foundry or base foundry by bashing 'foundryup'
+FundMe.sol — Main contract. Accepts ETH funding and allows owner withdrawal
+DeployFundMe.s.sol — Deployment script
+HelperConfig.s.sol — Manages network config and Chainlink price feed addresses
 
-To restore zksync, bash 'foundryup -zksync'
+License: MIT
